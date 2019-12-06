@@ -40,8 +40,6 @@ public class CalculatorWindow extends JFrame {
     private JButton buttonDev;
     
     private JLabel label;
-    //private int buttonSize = 50;
-            
     public CalculatorWindow (){        
         setTitle("Calculator");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -60,8 +58,6 @@ public class CalculatorWindow extends JFrame {
         panel1.setVisible(true);
         
         panel1.setBackground(Color.lightGray);
-        //panel1.setLayout(new FlowLayout());
-        
                 
         add(panel1, NORTH);
         JPanel panel2 = new JPanel();
@@ -72,7 +68,7 @@ public class CalculatorWindow extends JFrame {
         panel3.setVisible(true);
         add(panel3, SOUTH);
         
-        //panel1.setLayout(new FlowLayout());
+        
         panel2.setLayout(new GridLayout(4,4,10,10));
         panel3.setLayout(new GridLayout(1,1,10,10));
 //      
@@ -120,13 +116,12 @@ public class CalculatorWindow extends JFrame {
         panel2.add(buttonDev);
         
         panel3.add(buttonEq);
-        //double result = 0;
+        
         double[] buffer = new double[3];
         buffer[2] = 0;
-        //String[] sign = new String[2];
-        String[] sign = new String[2];
+        String[] sign = new String[1];
         sign[0] = "+";   
-        sign[1] = "+"; 
+        
         MouseListener buttonMouseListener = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) { 
@@ -157,24 +152,18 @@ public class CalculatorWindow extends JFrame {
             
             public void mouseClicked(MouseEvent me) {
                 JButton button = (JButton) me.getComponent();
-                
-                
                 switch (sign[0]) {                  
                     case ("+"):
                         buffer[0] = buffer[0] + buffer [1];
-                        sign[0] = "+";
                         break;
                     case ("-"):
                         buffer[0] = buffer[0]-buffer [1];
-                        sign[0] = "-";
                         break;    
                     case ("*"):
                         buffer[0] = buffer[0]*buffer [1];
-                        sign[0] = "*";
                         break;
                     case ("/"):
                         buffer[0] = buffer[0]/buffer [1];
-                        sign[0] = "/";
                         break;
                     
                 } 
@@ -184,8 +173,6 @@ public class CalculatorWindow extends JFrame {
                 buffer[1] = 0;
                 
             }
-            
-           
         };
         
         button1.addMouseListener(buttonMouseListener);
