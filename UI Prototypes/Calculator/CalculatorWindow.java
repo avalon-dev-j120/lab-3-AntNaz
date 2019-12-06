@@ -8,6 +8,9 @@ import java.awt.*;
 import static java.awt.BorderLayout.*;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 
 
@@ -35,6 +38,8 @@ public class CalculatorWindow extends JFrame {
     private JButton buttonMinus;
     private JButton buttonMult;
     private JButton buttonDev;
+    
+    private JLabel label;
     //private int buttonSize = 50;
             
     public CalculatorWindow (){        
@@ -67,7 +72,7 @@ public class CalculatorWindow extends JFrame {
         panel3.setVisible(true);
         add(panel3, SOUTH);
         
-        
+        //panel1.setLayout(new FlowLayout());
         panel2.setLayout(new GridLayout(4,4,10,10));
         panel3.setLayout(new GridLayout(1,1,10,10));
 //      
@@ -90,7 +95,12 @@ public class CalculatorWindow extends JFrame {
         buttonDev = new JButton("/");
         buttonEq.setPreferredSize(new Dimension(WIDTH, 50));
         
-        
+        label = new JLabel("");
+        label.setFont(new Font ("TimesRoman", Font.BOLD, 30));
+        label.setBackground(Color.yellow);
+        label.setPreferredSize(new Dimension(width-70, 50));
+        label.setHorizontalAlignment(JLabel.RIGHT);
+        panel1.add(label);
         
         panel2.add(button7);
         panel2.add(button8);
@@ -110,6 +120,62 @@ public class CalculatorWindow extends JFrame {
         panel2.add(buttonDev);
         
         panel3.add(buttonEq);
+        double result = 0;
+        double[] buffer = new double[2];
+        String[] sign = new String[2];
+        sign[0] = null;
+        
+        MouseListener buttonMouseListener = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                JButton button = (JButton) me.getComponent();
+                label.setText(label.getText() + button.getText());
+                buffer[0] = Double.parseDouble(label.getText());
+                
+            }
+           
+        };
+         MouseListener buttonCEMouseListener = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {                
+                label.setText("");
+                buffer[0] = 0;
+                buffer[1] = 0;
+            }
+           
+        };
+         
+        MouseListener buttonPlusMouseListener = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                    if (sign[0] == "plus") {
+                    buffer[1] = buffer[0] + buffer [1];
+                    //buffer[1] = buffer[1];                    
+                    //sign[1] = "plus";
+                    //sign[0] = null;
+                    
+                    }                
+                sign[0] = "plus";
+                label.setText(String.valueOf(buffer[0]));
+                buffer[0] = 0;
+                
+            }
+           
+        };
+        
+        button1.addMouseListener(buttonMouseListener);
+        button2.addMouseListener(buttonMouseListener);
+        button3.addMouseListener(buttonMouseListener);
+        button4.addMouseListener(buttonMouseListener);
+        button5.addMouseListener(buttonMouseListener);
+        button6.addMouseListener(buttonMouseListener);
+        button7.addMouseListener(buttonMouseListener);
+        button8.addMouseListener(buttonMouseListener);
+        button9.addMouseListener(buttonMouseListener);
+        button0.addMouseListener(buttonMouseListener);
+        buttonPoint.addMouseListener(buttonMouseListener);
+        buttonCE.addMouseListener(buttonCEMouseListener);
+        buttonPlus.addMouseListener(buttonPlusMouseListener);
         
     }
      
