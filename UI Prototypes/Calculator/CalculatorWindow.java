@@ -120,17 +120,23 @@ public class CalculatorWindow extends JFrame {
         panel2.add(buttonDev);
         
         panel3.add(buttonEq);
-        double result = 0;
-        double[] buffer = new double[2];
+        //double result = 0;
+        double[] buffer = new double[3];
+        buffer[2] = 0;
+        //String[] sign = new String[2];
         String[] sign = new String[2];
-        sign[0] = null;
-        
+        sign[0] = "+";   
+        sign[1] = "+"; 
         MouseListener buttonMouseListener = new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent me) {
+            public void mouseClicked(MouseEvent me) { 
+                if (buffer[2] == 0) {
+                label.setText("");
+                buffer[2] = 1;
+                }
                 JButton button = (JButton) me.getComponent();
                 label.setText(label.getText() + button.getText());
-                buffer[0] = Double.parseDouble(label.getText());
+                buffer[1] = Double.parseDouble(label.getText());
                 
             }
            
@@ -141,25 +147,44 @@ public class CalculatorWindow extends JFrame {
                 label.setText("");
                 buffer[0] = 0;
                 buffer[1] = 0;
+                sign[0] = "+";
             }
            
         };
-         
-        MouseListener buttonPlusMouseListener = new MouseAdapter() {
+        
+        MouseListener buttonSignMouseListener = new MouseAdapter() {
             @Override
+            
             public void mouseClicked(MouseEvent me) {
-                    if (sign[0] == "plus") {
-                    buffer[0] = buffer[0] + buffer [1];
-                    //buffer[1] = buffer[1];                    
-                    //sign[1] = "plus";
-                    //sign[0] = null;
+                JButton button = (JButton) me.getComponent();
+                
+                
+                switch (sign[0]) {                  
+                    case ("+"):
+                        buffer[0] = buffer[0] + buffer [1];
+                        sign[0] = "+";
+                        break;
+                    case ("-"):
+                        buffer[0] = buffer[0]-buffer [1];
+                        sign[0] = "-";
+                        break;    
+                    case ("*"):
+                        buffer[0] = buffer[0]*buffer [1];
+                        sign[0] = "*";
+                        break;
+                    case ("/"):
+                        buffer[0] = buffer[0]/buffer [1];
+                        sign[0] = "/";
+                        break;
                     
-                    }                
-                sign[0] = "plus";
-                label.setText(String.valueOf(buffer[0]));
-                buffer[1] = buffer[0];
+                } 
+                sign[0] = button.getText();
+                label.setText(Double.toString(buffer[0]));
+                buffer[2] = 0;
+                buffer[1] = 0;
                 
             }
+            
            
         };
         
@@ -175,7 +200,11 @@ public class CalculatorWindow extends JFrame {
         button0.addMouseListener(buttonMouseListener);
         buttonPoint.addMouseListener(buttonMouseListener);
         buttonCE.addMouseListener(buttonCEMouseListener);
-        buttonPlus.addMouseListener(buttonPlusMouseListener);
+        buttonPlus.addMouseListener(buttonSignMouseListener);
+        buttonMinus.addMouseListener(buttonSignMouseListener);
+        buttonMult.addMouseListener(buttonSignMouseListener);
+        buttonDev.addMouseListener(buttonSignMouseListener);
+        buttonEq.addMouseListener(buttonSignMouseListener);
         
     }
      
