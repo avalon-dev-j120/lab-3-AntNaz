@@ -149,7 +149,7 @@ public class CalculatorWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent me) {
                     if (sign[0] == "plus") {
-                    buffer[1] = buffer[0] + buffer [1];
+                    buffer[0] = buffer[0] + buffer [1];
                     //buffer[1] = buffer[1];                    
                     //sign[1] = "plus";
                     //sign[0] = null;
@@ -157,7 +157,7 @@ public class CalculatorWindow extends JFrame {
                     }                
                 sign[0] = "plus";
                 label.setText(String.valueOf(buffer[0]));
-                buffer[0] = 0;
+                buffer[1] = buffer[0];
                 
             }
            
