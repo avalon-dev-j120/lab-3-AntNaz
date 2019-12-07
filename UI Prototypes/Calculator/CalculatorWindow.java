@@ -14,10 +14,6 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 
-/**
- *
- * @author Anton
- */
 public class CalculatorWindow extends JFrame {
     final int width = 300;
     final int height = 400;
@@ -126,8 +122,15 @@ public class CalculatorWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent me) { 
                 if (buffer[2] == 0) {
-                label.setText("");
-                buffer[2] = 1;
+                    label.setText("");
+                    buffer[2] = 1;
+                }
+                if (buffer[2] == 2) {
+                    label.setText("");
+                    buffer[0] = 0;
+                    buffer[1] = 0;
+                    sign[0] = "+";
+                    buffer[2] = 1;
                 }
                 JButton button = (JButton) me.getComponent();
                 label.setText(label.getText() + button.getText());
@@ -167,10 +170,15 @@ public class CalculatorWindow extends JFrame {
                         break;
                     
                 } 
-                sign[0] = button.getText();
-                label.setText(Double.toString(buffer[0]));
+                
                 buffer[2] = 0;
                 buffer[1] = 0;
+                
+                sign[0] = button.getText();
+                if (sign[0] == "=") {
+                    buffer[2] = 2;
+                }
+                label.setText(Double.toString(buffer[0]));
                 
             }
         };
