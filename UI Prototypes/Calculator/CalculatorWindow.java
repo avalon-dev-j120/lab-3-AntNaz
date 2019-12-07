@@ -1,7 +1,6 @@
 
 package Calculator;
 
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.*;
@@ -12,7 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
-
 
 public class CalculatorWindow extends JFrame {
     final int width = 300;
@@ -49,6 +47,7 @@ public class CalculatorWindow extends JFrame {
          * В связи с этим, установлен полный запрет на изменение размеров окна.
          * @link https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6464548
          **/
+        
         this.setMaximumSize(new Dimension(400, 500));
         this.setMinimumSize(new Dimension(300, 400));
         setResizable(false);
