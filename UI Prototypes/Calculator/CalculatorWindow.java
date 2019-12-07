@@ -42,17 +42,24 @@ public class CalculatorWindow extends JFrame {
         setLocationByPlatform(true);
         setVisible(true);
         setSize(width, height);
-        setMaximumSize(new Dimension(400, 500));
-        setMinimumSize(new Dimension(100, 200));
-        LayoutManager layout = new BorderLayout(10, 10);
-        setLayout(layout);
+        
+        /**
+         * Метод setMaximumSize не работает из-за бага непосредственно
+         * в платформе java.
+         * В связи с этим, установлен полный запрет на изменение размеров окна.
+         * @link https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6464548
+         **/
+        this.setMaximumSize(new Dimension(400, 500));
+        this.setMinimumSize(new Dimension(300, 400));
         setResizable(false);
         
+        
+        LayoutManager layout = new BorderLayout(10, 10);
+        setLayout(layout);
         
         JPanel panel1 = new JPanel();
         panel1.setPreferredSize(new Dimension(WIDTH, 70));
         panel1.setVisible(true);
-        
         panel1.setBackground(Color.lightGray);
                 
         add(panel1, NORTH);
@@ -89,7 +96,7 @@ public class CalculatorWindow extends JFrame {
         
         label = new JLabel("");
         label.setFont(new Font ("TimesRoman", Font.BOLD, 30));
-        label.setBackground(Color.yellow);
+        //label.setBackground(Color.yellow);
         label.setPreferredSize(new Dimension(width-70, 50));
         label.setHorizontalAlignment(JLabel.RIGHT);
         panel1.add(label);
