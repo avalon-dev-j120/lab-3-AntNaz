@@ -59,6 +59,9 @@ public class ColorPicker extends JFrame {
                 String redHex = Integer.toHexString(r);
                 String greenHex = Integer.toHexString(g);
                 String blueHex = Integer.toHexString(b);
+                if (r<17) redHex = "0" + redHex;
+                if (g<17) greenHex = "0" + greenHex;
+                if (b<17) blueHex = "0" + blueHex;
                 String hexColor = "#" + redHex + greenHex + blueHex;
                 square.setToolTipText(hexColor);
                 StringSelection stringSelection = new StringSelection(hexColor);
