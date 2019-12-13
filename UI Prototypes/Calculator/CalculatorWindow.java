@@ -172,19 +172,21 @@ public class CalculatorWindow extends JFrame {
                         buffer[0] = buffer[0]*buffer [1];
                         break;
                     case ("/"):
-                        buffer[0] = buffer[0]/buffer [1];
+                        if (buffer[1] == 0) label.setText("Dev. by 0");
+                        else buffer[0] = buffer[0]/buffer [1];
                         break;
                     
                 } 
                 
                 buffer[2] = 0;
-                buffer[1] = 0;
+                
                 
                 sign[0] = button.getText();
                 if (sign[0] == "=") {
                     buffer[2] = 2;
                 }
-                label.setText(Double.toString(buffer[0]));
+                if (buffer[1] != 0) label.setText(Double.toString(buffer[0]));
+                buffer[1] = 0;
                 
             }
         };
